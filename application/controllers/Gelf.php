@@ -160,21 +160,35 @@
 						$tags[] = $tag;
 				}
 
+				$facility = "syslog";
+				if (isset($jsonObject->facility))
+					$facility = $jsonObject->facility;
 
-				/*
-				 * 				$this->stasher->sendMessage(LOG_INFO,
-					"Attempting reservation for " . $postObject->reserve_to . " contact " . $postObject->contact_msisdn,
-					"Attempting reservation for " . $postObject->reserve_to . " contact " . $postObject->contact_msisdn,
-					'eventlog',
-					array(
-						'client_ip' => $_SERVER['REMOTE_ADDR'],
-						'resevation' => $postObject->contact_msisdn
-					),
-					array('reservation', 'approval', strtoupper($response['condition'])),
-					__FILE__,
-					__LINE__
-				);
-				 */
+				if (isset($jsonObject->file))
+					$file = $jsonObject->file;
+				else
+					$file = "N/A";
+
+				if (isset($jsonObject->line))
+					$line = $jsonObject->line;
+				else
+					$line = "N/A";
+
+
+				if ($this->logger->sendMessage(
+					$LOG_LEVEL,
+					$jsonObject->shortmessage,
+					$jsonObject->fullmessage,
+					$facility,
+					$keys,
+					$tags,
+					$file,
+					$line
+				))
+					throw new Exception("Submission to logger failed", 503);
+
+				$this->response(array("message"=>"OK"), 200);
+
 			} catch (Exception $e) {
 				$response = array("error" => $e->getMessage());
 				$this->response($response, $e->getCode()); // 200 being the HTTP response code

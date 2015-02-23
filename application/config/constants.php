@@ -93,6 +93,6 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 | The below section may be modified to custom fit your environment
 |
 */
-define('GELF_HOST',     '127.0.0.1');
+define('GELF_HOST',     'gelf.server.for.your.application');
 define('GELF_PORT',     12201);
 define('GELF_FACILITY', 'syslog');

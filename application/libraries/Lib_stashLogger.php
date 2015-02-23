@@ -22,7 +22,7 @@
      * the library `logstash-http-wrapper' (a GELF Format HTTP Wrapper)
      * written by Nir Simionovich and its respective list of contributors.
      */
-    
+
     class Lib_stashLogger
     {
 
