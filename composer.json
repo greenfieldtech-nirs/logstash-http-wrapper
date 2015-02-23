@@ -1,0 +1,9 @@
+{
+  "require":{
+    "php":">=5.3.9",
+    "graylog2/gelf-php": "1.1.1",
+    "codeigniter/framework": "3.0rc2"
+  },
+  "autoload":{
+  }
+}
